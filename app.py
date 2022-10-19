@@ -33,6 +33,6 @@ async def predict_function(file:UploadFile = File(...)):
     return {"Predicted Bird":classifier,
             "Confidence":round((confidence*100),2)}
 
-if __name__ == "__main__":
-    uvicorn.run(app,host='localhost',port=8000)
+'''if __name__ == "__main__":
+    uvicorn.run(app,host='localhost',port=8000)'''
 
