@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from tensorflow import keras
 import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
@@ -37,7 +38,8 @@ async def predict_function(file:UploadFile = File(...)):
 
 @app.post("/predict/gender")
 async def predict_function(file:UploadFile = File(...)):
-    image = returnImage(await file.read())
+    bytes_data = await file.read()
+    image = returnImage(bytes_data)
     image = cv2.resize(image, (224, 224))
     image = image.reshape(-1, 224, 224, 3)
     test_input = ImageDataGenerator(rescale=1. / 255.0).flow(image)
@@ -50,5 +52,3 @@ async def predict_function(file:UploadFile = File(...)):
 
 '''if __name__ == "__main__":
     uvicorn.run(app,host='localhost',port=8000)'''
-
-#scikit_learn==1.0.2 - removed req
